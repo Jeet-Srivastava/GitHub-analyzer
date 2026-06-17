@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 //db connection using Aiven service URI
 const db = mysql.createConnection({
   uri: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: true }
+  ssl: { rejectUnauthorized: false }
 });
 
 db.connect((err) => {
