@@ -30,7 +30,8 @@ app.get('/api/analyze/:username', async (req, res) => {
   const username = req.params.username;
   console.log("Fetching for user:", username);
   try {
-    const githubResponse = await axios.get(`https://api.github.com/users/${username}`);
+    const headers = process.env.GITHUB_TOKEN ? { Authorization: `token ${process.env.GITHUB_TOKEN}` } : {};
+    const githubResponse = await axios.get(`https://api.github.com/users/${username}`, { headers });
     const data = githubResponse.data;
 
     const query = `INSERT INTO profiles (username, name, public_repos, followers, following)
